@@ -1,0 +1,152 @@
+.header {
+    &__container {
+        z-index: 3;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid lightgray;
+
+        height: 80px;
+
+        background-color: #fff;
+    }
+
+    &__main-title {
+        margin-left: 30px;
+        font-size: 16px;
+    }
+
+    &__user-navcontainer {
+        display: flex;
+        height: 100%;
+    }
+
+    &__nav-icon {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border-left: 1px solid #E9E9EC;
+        background: #f7f7f8;
+        transition: 250ms;
+
+        & svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            color: #99999a;
+        }
+
+        &:hover {
+            background: #fff;
+            svg {
+                color: #000;
+            }
+        }
+
+        &--active{
+            background: #fff;
+
+            &:after {
+                z-index: 3;
+                content: '';
+                width: 80px;
+                height: 1px;
+                background: #fff;
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+            }
+        }
+    }
+
+    &__logo-container {
+        width: 200px;
+        height: 100%;
+        border-right: 1px solid #E9E9EC;
+    }
+
+    &__logo {
+        width: 90%;
+        height: 100%;
+        margin: 0 5%;
+
+        background-image: url('../../../../img/favicon-sqf.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+    &__user-container {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        justify-content: center;
+
+        height: 100%;
+        margin-left: auto;
+    }
+
+    &__user-title {
+        font-size: 0.9rem;
+    }
+
+    &__user-logo {
+
+        cursor: pointer;
+        transition: 250ms;
+
+        font-size: 18px;
+
+        &:hover {
+            color: #333;
+        }
+    }
+
+    &__user-image {
+        width: 50px;
+        height: 50px;
+        margin: 15px;
+        border-radius: 50%;
+        overflow: hidden;
+        opacity: 0.8;
+
+        transition: opacity 0.3s;
+
+        & img {
+            width: 50px;
+            height: auto;
+        }
+    }
+
+    &__user-image:hover {
+        opacity: 1;
+    }
+
+    &__password-title,
+    &__email-title {
+        min-width: 150px;
+
+        color: #888;
+    }
+
+    &__password-container,
+    &__email {
+        display: flex;
+        align-items: center;
+    }
+
+    &__change-password-container,
+    &__change-email-container {
+        min-width: 300px;
+        margin-top: 20px;
+    }
+
+    &__email-message {
+        margin-left: 150px;
+    }
+}

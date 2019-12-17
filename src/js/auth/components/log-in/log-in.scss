@@ -1,0 +1,67 @@
+.log-in {
+    &__container {
+        position: relative;
+        display: block;
+        width: 400px;
+        height: 300px;
+        margin-top: 100px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 0 50px #adadad;
+    }
+
+    &__field {
+        position: relative;
+        margin: 30px 40px;
+
+        & input {
+            border: 0;
+            border-bottom: lightgray 2px solid;
+            font-size: 16px;
+            width: 100%;
+            padding: 5px;
+        }
+    }
+
+    &__button {
+        position: relative;
+        //border: lightgray 1px solid;
+        border-radius: 20px;
+        padding: 10px;
+        width: 100%;
+        background: transparent;
+    }
+
+    &__button-color {
+        position: absolute;
+        background: linear-gradient(to right bottom, #21d4fd, #b721ff);
+        width: 200%;
+        height: 40px;
+        left: -100%;
+        transition: all 0.5s;
+    }
+
+    &__submit {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        margin: 50px 40px;
+        box-shadow: 0 5px 10px lightgray;
+
+        &:hover {
+            div#color {
+                left: 0;
+            }
+        }
+
+        &:active {
+            margin: 51px 41px;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+}

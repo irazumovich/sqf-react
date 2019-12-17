@@ -1,0 +1,30 @@
+@import './../../../styles/variables';
+
+.authentication {
+    &__container {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        flex: 1 100%;
+        justify-content: center;
+
+        min-height: 100vh;
+
+        background: #e9e9ec;
+
+        &::before {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            width: 700px;
+            height: 700px;
+
+            content: '';
+
+            mix-blend-mode: multiply;
+            display:none /*turning off until image is available*/
+        }
+    }
+}
