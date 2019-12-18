@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {shape, bool, string, arrayOf, obj} from 'prop-types';
 import './goal.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,6 +12,8 @@ export const Goal = ({goals, match}) => {
 
     const fileRef = useRef(null);
 
+    const [comment, setComment] = useState('');
+
     useEffect(() => {
         console.log('id', match);
     }, [match]);
@@ -20,7 +22,7 @@ export const Goal = ({goals, match}) => {
         console.log(e.target.files)
         console.log('goals', goals);
         const goalId = goals[match.params.id].id;
-        const token = cookies.get('access_token',  { path: '/' });
+        const token = cookies.get('access_token', {path: '/'});
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const formData = new FormData();
         formData.append("file", e.target.files[0]);
@@ -31,6 +33,16 @@ export const Goal = ({goals, match}) => {
     const startUploading = useCallback(() => fileRef.current.click(), [
         fileRef
     ]);
+
+    const changeStatus = (e) => {
+        const {id, name} = e.target;
+        const token = cookies.get('access_token', {path: '/'});
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axios.put(`${process.env.BACKEND_APP_HOST}/goals/${id}/status`, {
+            status: name,
+            comment: comment,
+        });
+    };
 
     return (
         <div className="goal__container">
@@ -61,14 +73,44 @@ export const Goal = ({goals, match}) => {
                     Описание: <br/>
                     {goals[match.params.id] && goals[match.params.id].description}
                 </div>
-                <div className="goal__additional">
-                    Дополниельные материалы: <br/>
-                    {goals[match.params.id] && goals[match.params.id].additional_materials}
-                </div>
+                {goals[match.params.id] && goals[match.params.id].additional_materials ?
+                    <div className="goal__additional">
+                        Дополнительные материалы: <br/>
+                        {goals[match.params.id].additional_materials}
+                    </div> : ''
+                }
                 <div className="goal__status">
                     Статус: <br/>
                     {goals[match.params.id] && goals[match.params.id].status}
                 </div>
+                {
+                    goals[match.params.id] && goals[match.params.id].assess_goals ?
+                        <div className="goal__assesses">
+                            Проверьте других пользователей:
+                            {goals[match.params.id].assess_goals.map(goal => (
+                                <div key={goal.id} className='goal__assess-item'>
+                                    <div className='goal__row'>
+                                        <a href={goals[match.params.id] && goals[match.params.id].task_file}
+                                           title='Скачать решение для проверки'>
+                                            <FontAwesomeIcon icon={faFileDownload} size='1x'/>
+                                        </a>
+                                        <button className='goal__button' id={goal.id} name='Выполнена'
+                                                onClick={e => changeStatus(e)}>
+                                            Отметить как выполненное
+                                        </button>
+                                        <button className='goal__button' id={goal.id} name='Дорабатывается'
+                                                onClick={e => changeStatus(e)}>
+                                            На доработку
+                                        </button>
+                                    </div>
+                                    <textarea
+                                        placeholder='Комментарий' value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                    />
+                                </div>
+                            ))}
+                        </div> : ''
+                }
             </div>
         </div>
     );

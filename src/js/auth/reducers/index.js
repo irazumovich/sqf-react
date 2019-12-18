@@ -1,5 +1,5 @@
 import { handleActions } from "redux-actions";
-import {putAuthAction, putErrorsAction, putLoadingAction, putLoadingLoginAction} from "auth/actions";
+import {putAuthAction, putErrorsAction, putLoadingAction, putLoadingLoginAction, resetStoreAction} from "auth/actions";
 import produce from "immer"
 
 
@@ -25,6 +25,9 @@ export default handleActions(
         }),
         [putErrorsAction]: (state, {payload: {errors}}) => produce(state, draftState => {
             draftState.errors = errors;
+        }),
+        [resetStoreAction]: (state) => produce(state, draftState => {
+            draftState = InitialState;
         }),
     },
     InitialState

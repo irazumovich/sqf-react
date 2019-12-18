@@ -6,3 +6,4 @@ export const putLoadingAction = createAction('PUT_LOADING_AUTH', (isLoading) => 
 export const putLoadingLoginAction = createAction('PUT_LOADING_LOGIN', (isLoading) => ({isLoading}));
 export const putErrorsAction = createAction('PUT_ERRORS', (errors) => ({errors}));
 export const logInAction = createAction('LOG_IN_ACTION', (email, password, setCookie) => ({email, password, setCookie}));
+export const resetStoreAction = createAction('RESET_STORE');

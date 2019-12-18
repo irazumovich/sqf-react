@@ -18,6 +18,7 @@ function* checkAuthSaga({payload: {cookies}}) {
         if (token) {
             const {data} = yield call(checkAuth);
             yield put(putAuthAction(true, data.data));
+            cookies.set('access_token', data.data.access_token, {path: '/'});
         } else {
             yield put(putAuthAction(false, {}));
         }

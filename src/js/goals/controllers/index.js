@@ -6,6 +6,8 @@ const token = cookies.get('access_token',  { path: '/' });
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 export const loadGoals = (userId) => {
+    const token = cookies.get('access_token',  { path: '/' });
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     return axios.get(process.env.BACKEND_APP_HOST + `/users/${userId}/goals`);
 };
 

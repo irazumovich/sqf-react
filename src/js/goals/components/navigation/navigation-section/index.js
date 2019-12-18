@@ -6,6 +6,7 @@ import {loadGoalsAction} from "goals/actions";
 
 export default connect(
     state => ({
+        token: state.auth.user.access_token,
         userId: state.auth.user && state.auth.user.id,
         isAuthorized: state.auth.isAuthorized,
         goals: state.goal.goals,

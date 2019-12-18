@@ -1,6 +1,7 @@
 import { handleActions } from "redux-actions";
 import {putErrorsAction, putGoalsAction, putLoadingAction} from "goals/actions";
 import produce from "immer"
+import {resetStoreAction} from "auth/actions";
 
 
 const InitialState = {
@@ -19,6 +20,9 @@ export default handleActions(
         }),
         [putErrorsAction]: (state, {payload: {errors}}) => produce(state, draftState => {
             draftState.errors = errors;
+        }),
+        [resetStoreAction]: (state) => produce(state, draftState => {
+            draftState = InitialState;
         }),
     },
     InitialState

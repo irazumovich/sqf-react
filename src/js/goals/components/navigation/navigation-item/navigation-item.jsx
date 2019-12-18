@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import 'goals/components/navigation/navigation-item/navigation-item.scss';
 
-const NavigationItem = ({ title, link, isActive, icon, rotate, notifications }) => (
+const NavigationItem = ({ title, link, isActive, icon, rotate, notifications, color }) => (
     <div
         className={ClassNames('navigation-item__container', {
             'navigation-item__container--active': isActive
@@ -16,8 +16,8 @@ const NavigationItem = ({ title, link, isActive, icon, rotate, notifications }) 
             <div className="navigation-item__notification">
                 <span>{notifications}</span>
             </div>
-            <span className="navigation-item__section">
-                {!!rotate && <FontAwesomeIcon icon={icon} className="navigation-item__icon" rotation={rotate} />}
+            <span className={ClassNames("navigation-item__section", `navigation-item__${color}`)}>
+                {!!rotate && <FontAwesomeIcon icon={icon} className="navigation-item__icon" color={color} rotation={rotate} />}
                 {!!!rotate && <FontAwesomeIcon icon={icon} className="navigation-item__icon" />}
                 {title}
             </span>

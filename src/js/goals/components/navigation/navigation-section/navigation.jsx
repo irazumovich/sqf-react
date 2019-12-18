@@ -40,7 +40,8 @@ class Navigation extends React.PureComponent {
     };
 
     componentDidUpdate(prevProps) {
-        if (this.props.userId !== prevProps.userId) {
+        if (this.props.token && this.props.userId !== prevProps.userId) {
+            console.log('token', this.props.token);
             console.log(this.props.userId)
             this.props.loadGoals(this.props.userId);
         }
@@ -56,6 +57,20 @@ class Navigation extends React.PureComponent {
                     isAuthorized &&
                     <div className="navigation__content">
                         {goals && goals.map((goal, i) => {
+                            let color;
+                            switch (goal.status) {
+                                case 'Выполнена':
+                                    color = 'green';
+                                    break;
+                                case 'В процессе':
+                                    color = 'blue';
+                                    break;
+                                case 'Назначена':
+                                    color = 'red';
+                                    break;
+                                default:
+                                    color = 'yellow';
+                            }
                             return (
                                 <NavigationItem
                                     customPath={i}
@@ -66,6 +81,7 @@ class Navigation extends React.PureComponent {
                                     // rotate={route.rotate}
                                     isActive={pathname.includes(`/goals/${i}`)}
                                     notifications={goal.unread}
+                                    color={color}
                                 />
                             )
                         })}
