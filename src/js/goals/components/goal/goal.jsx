@@ -87,10 +87,10 @@ export const Goal = ({goals, match}) => {
                     goals[match.params.id] && goals[match.params.id].assess_goals ?
                         <div className="goal__assesses">
                             Проверьте других пользователей:
-                            {goals[match.params.id].assess_goals.map(goal => (
+                            {goals[match.params.id].assess_goals.map((goal, i) => (
                                 <div key={goal.id} className='goal__assess-item'>
                                     <div className='goal__row'>
-                                        <a href={goals[match.params.id] && goals[match.params.id].task_file}
+                                        <a href={goals[match.params.id] && goals[match.params.id].assess_goals && goals[match.params.id].assess_goals[i].result_file}
                                            title='Скачать решение для проверки'>
                                             <FontAwesomeIcon icon={faFileDownload} size='1x'/>
                                         </a>
